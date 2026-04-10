@@ -52,7 +52,7 @@ jobs:
       matrix:
         CONFIG: [MT7981]
         REPO_INFO:
-          - {SOURCE: "oenhu/immortalwrt-mt798x-6.6", BRANCH: "openwrt-24.10-6.6"}
+          - {SOURCE: "https://github.com/oenhu/imm", BRANCH: "openwrt-24.10-6.6"}
 
     #调用公用编译核心WRT-CORE.yml
     uses: ./.github/workflows/WRT-CORE.yml
