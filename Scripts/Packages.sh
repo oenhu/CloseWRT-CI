@@ -63,7 +63,7 @@ UPDATE_PACKAGE "passwall2" "Openwrt-Passwall/openwrt-passwall2" "main" "pkg"
 
 UPDATE_PACKAGE "diskmanager" "4IceG/luci-app-mini-diskmanager" "main"
 UPDATE_PACKAGE "easytier" "EasyTier/luci-app-easytier" "main"
-UPDATE_PACKAGE "qmodem" "FUjr/QModem" "main"
+UPDATE_PACKAGE "qmodem" "FUjr/QModem" "stable"
 UPDATE_PACKAGE "vnt" "lmq8267/luci-app-vnt" "main"
 
 UPDATE_PACKAGE "diskman" "sbwml/luci-app-diskman" "main"
