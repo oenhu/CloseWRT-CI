@@ -70,3 +70,19 @@ if [ -d "$FEEDS_PATH/packages/lang/rust" ]; then
 		echo "rust fix failed; continuing!"
 	fi
 fi
+
+# Fibocom QMI WWAN 驱动使用了 Linux 6.6 已移除的 _irq 统计接口，
+# 并直接写入只读的 dev_addr；在编译前修正上游源码。
+QMI_WWAN_SOURCE="$PACKAGE_PATH/mtk/applications/5g-modem/fibocom_QMI_WWAN/src/qmi_wwan_f.c"
+if [ -f "$QMI_WWAN_SOURCE" ]; then
+	if sed -i \
+		-e 's/u64_stats_fetch_begin_irq(/u64_stats_fetch_begin(/g' \
+		-e 's/u64_stats_fetch_retry_irq(/u64_stats_fetch_retry(/g' \
+		-e 's/memcpy (qmap_net->dev_addr, real_dev->dev_addr, ETH_ALEN);/eth_hw_addr_set(qmap_net, real_dev->dev_addr);/' \
+		"$QMI_WWAN_SOURCE"; then
+		echo "Fibocom QMI WWAN has been fixed for Linux 6.6!"
+	else
+		echo "Fibocom QMI WWAN fix failed!" >&2
+		exit 1
+	fi
+fi
